@@ -1,0 +1,43 @@
+<div class="col-md-12" *ngIf="!car">
+    <div class="alert alert-success mt-4">
+        Cargando...
+    </div>
+</div>
+
+<div class="col-md-12" *ngIf="car">
+    <h4 class="mt-4">{{page_title}}</h4>
+
+    <div class="alert alert-success" *ngIf="status_car=='success'">
+        El coche se ha guardado correctamente
+    </div>
+
+    <div class="alert alert-danger" *ngIf="status_car=='error'">
+        El coche no se ha guardado correctamente
+    </div>
+
+    <form #carEdit="ngForm" (ngSubmit)="onSubmit(carEdit)" class="col-md-5" *ngIf="car">
+        <p>
+            <label for="title">Título</label>
+            <input type="text" name="title" #title="ngModel" [(ngModel)]="car.title" class="form-control" required />
+            <span *ngIf="!title.valid && title.touched">El campo título es obligatorio</span>
+        </p>
+        <p>
+            <label for="description">Descripción</label>
+            <textarea name="description" #description="ngModel" [(ngModel)]="car.description" class="form-control" required ></textarea>
+            <span *ngIf="!description.valid && description.touched">El campo descripción es obligatorio</span>
+        </p>
+        <p>
+            <label for="price">Precio</label>
+            <input type="number" name="price" #price="ngModel" [(ngModel)]="car.price" class="form-control" required />
+            <span *ngIf="!price.valid && price.touched">El campo precio es obligatorio</span>
+        </p>
+        <p>
+            <label for="status">¿A la venta?</label>
+            <select name="status" #status="ngModel" [(ngModel)]="car.status" class="form-control" required >
+                <option value="true" selected="selected">SI</option>
+                <option value="false">NO</option>
+            </select>
+        </p>
+        <input type="submit" value="Guardar" class="btn btn-success float-right" [disabled]="!carEdit.form.valid" />
+    </form>
+</div>

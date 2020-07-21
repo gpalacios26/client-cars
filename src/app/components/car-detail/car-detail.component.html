@@ -1,0 +1,16 @@
+<div class="col-md-12" *ngIf="!car">
+    <div class="alert alert-success mt-4">
+        Cargando...
+    </div>
+</div>
+
+<div class="col-md-12" *ngIf="car">
+    <h4 class="mt-4">{{page_title}}</h4>
+    <p class="mt-4"><strong>Título:</strong> {{car.title}}</p>
+    <p><strong>Precio:</strong> {{car.price}}</p>
+    <p><strong>Descripción:</strong> {{car.description}}</p>
+    <p><strong>Estado:</strong> 
+        <span class="badge badge-success ml-2" *ngIf="car.status == 'true'">DISPONIBLE</span>
+        <span class="badge badge-danger ml-2" *ngIf="car.status != 'true'">NO DISPONIBLE</span>
+    </p>
+</div>
